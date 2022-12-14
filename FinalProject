@@ -1,0 +1,612 @@
+
+# Group 4 || Payroll System
+''' Members:
+        Maeveelyn Dexter Ablir
+        Ralyn Carla G. Bertillo
+        Abigail N. Capinding
+        Ashley Nicole R. Francisco
+'''   
+
+try:
+#--------------------------------------------------------------------------
+    #Alternative Login.
+    def starting():
+        menu = True
+        while menu: 
+            print("\n   ============================================================")
+            print("   ||             Welcome to the Payroll System!             ||")
+            print("   ||                      BY MARA INC.                      ||")
+            print("   ============================================================")
+
+            print("\n   | Please Choose your Computation (Daily or Monthly)")
+            choices =  input("   | Enter Command [D/M]:  ")
+            if choices == 'D' or choices == 'd':
+                daily()
+
+                print("   |")
+                tryagain = input("   | Do you want to try again? [Y/N]:   ")
+                if tryagain == 'Y' or tryagain == 'y':
+                    menu = True
+                elif tryagain == 'N' or tryagain == 'n':
+                    menu = False
+                else:
+                    print("\n   >>>>>>>>>>>>>>>        INVALID  INPUT        <<<<<<<<<<<<<<<")
+
+            elif choices == 'M' or choices == 'm':
+                monthly()
+
+                print("   |")
+                tryagain = input("   | Do you want to try again? [Y/N]:   ")
+                if tryagain == 'Y' or tryagain == 'y':
+                    menu = True
+                elif tryagain == 'N' or tryagain == 'n':
+                    menu = False
+                else:
+                    print("\n   >>>>>>>>>>>>>>>        INVALID  INPUT        <<<<<<<<<<<<<<<")
+            else:
+                print("\n   >>>>>>>>>>>>>>>       INVALID  COMMAND       <<<<<<<<<<<<<<<")
+
+                tryagain = input("   | Do you want to try again? [Y/N]:   ")
+                if tryagain == 'Y' or tryagain == 'y':
+                    menu = True
+                elif tryagain == 'N' or tryagain == 'n':
+                    menu = False
+                else:
+                    print("\n   >>>>>>>>>>>>>>>        INVALID  INPUT        <<<<<<<<<<<<<<<")
+
+#--------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------
+
+    #Daily Codes
+    def daily():
+
+        #Daily Information
+        print("\n   ============================================================")
+        print("   ||           D A I L Y  C O M P U T A T I O N S           ||")
+        print("   ============================================================")
+
+        emp_fname = input("\n   | Enter Employee's First Name:  ")
+        emp_lname = input("   | Enter Employee's Last Name:   ")
+        basic_paybyhour  = int(input('   | Enter Hourly Pay:             '))
+        work_hours = int(input('   | Enter Work Hours:             '))
+
+        dailysalary = basic_paybyhour * work_hours
+
+        #D Tardy Question
+        print("   |")
+        tardychoice = input("   | Did the employee have any tardies? [Y/N]:  ")
+
+        #D Tardiness
+        if tardychoice == 'Y' or tardychoice == 'y':
+
+            #D Tardy Input
+            tardiesbyminutes = int(input('   | Tardiness by Minutes:         '))
+
+            #D Tardy Computation
+            tardycomputation = basic_paybyhour / 60 * tardiesbyminutes 
+
+            #D Tardy Display
+            print("   | Daily Tardy Deduction:        %.2f" % tardycomputation)
+
+            #D Overtime Question 
+            print("   |")
+            overtimechoice = input("   | Did the employee have any overtime? [Y/N]: ")
+
+            #D Overtime (YY)
+            if overtimechoice == 'Y' or overtimechoice == 'y': 
+                    
+                #D Overtime Input (YY)
+                overtimebyhour = int(input('   | Overtime Hours:               '))
+
+                #D Overtime Computation (YY)
+                overtimecomputation = basic_paybyhour * 1.5 * overtimebyhour
+                    
+                #D Overtime Display (YY)
+                print("   | Daily Overtime Pay:           %.2f" % overtimecomputation)
+
+                #Daily Computation Salary for YES - YES
+                dailysalaryYY = ((dailysalary - tardycomputation) + overtimecomputation)
+
+                print("   |")
+                print("   | Daily Gross Pay:              %.2f" % dailysalary)
+                print("   | Daily Net Pay:                %.2f" % dailysalaryYY)
+                
+            #D Overtime (YN)
+            elif overtimechoice == 'N' or overtimechoice == 'n':
+
+                #Daily Computation Salary for YES - NO
+                dailysalaryYN = (dailysalary - tardycomputation)
+
+                print("   |")
+                print("   | Daily Gross Pay:             %.2f " % dailysalary)
+                print("   | Daily Net Pay:                %.2f" % dailysalaryYN)
+                
+            #For Wrong Inputs
+            else:
+                print("\n   >>>>>>>>>>>>>>>        INVALID  INPUT        <<<<<<<<<<<<<<<")
+
+        #D Tardiness (N)
+        elif tardychoice == 'N' or tardychoice == 'n':
+
+            #D Overtime Question
+            print("   |")
+            overtimechoice = input("   | Did the employee have any overtime? [Y/N]: ")
+
+            #Daily Overtime (NY)
+            if overtimechoice == 'Y' or overtimechoice == 'y':  
+
+                #D Overtime Input (NY)
+                overtimebyhour = int(input('   | Overtime Hours:               '))
+
+                #D Overtime Computation (NY)
+                overtimecomputation = basic_paybyhour * 1.5 * overtimebyhour
+                    
+                #D Overtime Display (NY)
+                print("   | Daily Overtime Pay:           ", overtimecomputation)
+
+                #Daily  Computation Salary for NO - YES
+                dailysalaryNY = (dailysalary + overtimecomputation)
+
+                print("   |")
+                print("   | Daily Gross Pay:              %.2f" % dailysalaryNY)
+                print("   | Daily Net Pay:                %.2f" % dailysalary)
+                
+            #D Overtime (NN)
+            elif overtimechoice == 'N' or overtimechoice == 'n':
+
+                #Daily Computation Salary for NO - NO
+                dailysalaryNN = dailysalary
+
+                print("   |")
+                print("   | Daily Gross Pay:              %.2f" % dailysalaryNN)
+                print("   | Daily Net Pay:                %.2f" % dailysalary)
+                
+            #For Wrong Inputs
+            else:
+                print("\n   >>>>>>>>>>>>>>>        INVALID  INPUT        <<<<<<<<<<<<<<<")
+            
+        #For Wrong Inputs
+        else:
+            print("\n   >>>>>>>>>>>>>>>        INVALID  INPUT        <<<<<<<<<<<<<<<")
+
+#--------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------
+    
+    #Monthy Codes
+    def monthly():
+
+        #Monthly Information
+        print("\n   ============================================================")
+        print("   ||         M O N T H L Y  C O M P U T A T I O N S         ||")
+        print("   ============================================================")
+        
+        emp_fname = input("\n   | Enter Employee's First Name:  ")
+        emp_lname = input("   | Enter Employee's Last Name:   ")
+        basic_paybyhour  = int(input('   | Enter Hourly Pay:             '))
+        work_hours = int(input('   | Enter Work Hours:             '))
+        days_present  = int(input('   | Enter Days Present:           '))
+
+        monthlysalary = basic_paybyhour * work_hours * days_present
+
+        #M Tardy Question
+        print("   |")
+        tardychoice = input("   | Did the employee have any tardies? [Y/N]:          ")
+
+        #M Tardiness (Y)
+        if tardychoice == 'Y' or tardychoice == 'y':
+
+            #M Tardy Input
+            tardiesbyminutes = int(input('   | Tardiness by Minutes:         '))
+      
+            #M Tardy Computation 
+            tardycomputation = basic_paybyhour / 60 * tardiesbyminutes
+                
+            #M Tardy Display
+            print("   | Monthly Tardy Deduction:      %.2f" % tardycomputation)
+            
+            #M Incomplete Question
+            print("   |")
+            incompletechoice = input("   | Did the employee have any incomplete hours? [Y/N]: ")
+
+            #M Incompletes (YY)
+            if incompletechoice == 'Y' or incompletechoice == 'y':
+
+                #M Incomplete Input (YY)
+                incompletehour = int(input('   | Incomplete Hours:             '))
+
+                #M Incomplete Computation (YY)
+                incompletecomputation = basic_paybyhour * incompletehour
+
+                #M Incomplete Display (YY)
+                print("   | Monthly Incomplete Hours Deduction: %.2f" % incompletecomputation)
+
+                #M Overtime Question
+                print("   |")
+                overtimechoice = input("   | Did the employee have any overtime? [Y/N]:         ")
+
+                #M Overtime (YYY)
+                if overtimechoice == 'Y' or overtimechoice == 'y':
+
+                    #M Overtime Question
+                    overtimebyhour = int(input('   | Overtime Hours:               '))
+
+                    #M Overtime Computation (YYY)
+                    overtimecomputation = basic_paybyhour * 1.5 * overtimebyhour
+
+                    #M Overtime Display (YYY) 
+                    print("   | Monthly Overtime Pay:         %.2f" % overtimecomputation)
+
+                    #M Salary Computation (YYY)
+                    monthlysalaryYYY = ((monthlysalary - (tardycomputation + incompletecomputation)) + overtimecomputation)
+
+                    #M Premium Deductions (YYY)
+                    sss = monthlysalaryYYY * 0.045
+                    pagibig = 100 
+                    philhealth = monthlysalaryYYY * 0.04 
+
+                    #M Premium Displays (YYY)
+                    print("\n   ======================================")
+                    print("   ||        PREMIUM DEDUCTIONS        ||")
+                    print("   ======================================")
+                    print("   |")
+                    print("   | SSS Contribution:             %.2f" % sss)
+                    print("   | PAG-IBIG Contribution:       ", pagibig)
+                    print("   | PHILHEALTH Contribution:      %.2f" % philhealth)
+
+                    #M Premium Computation 
+                    totalpremiumdeduction = sss + pagibig + philhealth
+
+                    #M Premium Display (YYY)
+                    print("   | Premium Deduction Total:      %.2f" % totalpremiumdeduction)
+                    
+                    #M Net Pay Computation (YYY)
+                    deductedYYY = monthlysalaryYYY - totalpremiumdeduction
+
+                    #M Net Pay for YES - YES - YES
+                    print("   |")
+                    print("   | Monthly Gross Pay:            %.2f" % monthlysalary)
+                    print("   | Monthly Net Pay:              %.2f" % deductedYYY)
+
+                #Monthly Overtime (YYN)
+                elif overtimechoice == 'N' or overtimechoice == 'n':
+
+                    #M No asking for overtime input
+
+                    #M Premium Computation
+                    monthlysalaryYYN = monthlysalary - (tardycomputation + incompletecomputation)
+
+                    #M Premium Deductions
+                    sss = monthlysalaryYYN * 0.045
+                    pagibig = 100 
+                    philhealth = monthlysalaryYYN * 0.04 
+
+                    #M Premium Displays (YYN)
+                    print("\n   ======================================")
+                    print("   ||        PREMIUM DEDUCTIONS        ||")
+                    print("   ======================================")
+                    print("   |")
+                    print("   | SSS Contribution:             %.2f" % sss)
+                    print("   | PAG-IBIG Contribution:       ", pagibig)
+                    print("   | PHILHEALTH Contribution:      %.2f" % philhealth)
+
+                    #M Premium Computation (YYN)
+                    totalpremiumdeduction = sss + pagibig + philhealth
+                    print("   | Premium Deduction Total:      %.2f" % totalpremiumdeduction)
+
+                    #M Net Pay Computation (YYN)
+                    deductedYYN = monthlysalaryYYN - totalpremiumdeduction
+                    
+                    #M Net Pay for YES - YES - NO
+                    print("   |")
+                    print("   | Monthly Gross Pay:            %.2f" % monthlysalary)
+                    print("   | Monthly Net Pay:              %.2f" % deductedYYN)
+
+                #For Wrong Inputs
+                else:
+                    print("\n   >>>>>>>>>>>>>>>        INVALID  INPUT        <<<<<<<<<<<<<<<")
+                     
+            #Monthly Incompletes (YN)
+            elif incompletechoice == 'N' or incompletechoice == 'n':
+
+                #No need to ask incompelete hours input
+
+                #M Overtime Question
+                print("   |")
+                overtimechoice = input("   | Did the employee have any overtime? [Y/N]:         ")
+
+                #Monthly Overtime (YNY)
+                if overtimechoice == 'Y' or overtimechoice == 'y':
+                    overtimebyhour = int(input('   | Overtime Hours:               '))
+
+                    #M Overtime Computation (YNY)
+                    overtimecomputation = basic_paybyhour * 1.5 * overtimebyhour
+
+                    #M Overtime Display (YNY) 
+                    print("   | Monthly Overtime Pay:         %.2f"  % overtimecomputation)
+
+                    #M Salary Computation 
+                    monthlysalaryYNY = (monthlysalary - tardycomputation) + overtimecomputation
+
+                    #Premium Deductions
+                    sss = monthlysalaryYNY * 0.045
+                    pagibig = 100 
+                    philhealth = monthlysalaryYNY * 0.04 
+
+                    #M Premium Display (YNY)
+                    print("\n   ======================================")
+                    print("   ||        PREMIUM DEDUCTIONS        ||")
+                    print("   ======================================")
+                    print("   |")
+                    print("   | SSS Contribution:             %.2f" % sss)
+                    print("   | PAG-IBIG Contribution:       ", pagibig)
+                    print("   | PHILHEALTH Contribution:      %.2f" % philhealth)
+
+                    #M Premium Computation (YNY)
+                    totalpremiumdeduction = sss + pagibig + philhealth
+                    print("   | Premium Deduction Total:      %.2f" % totalpremiumdeduction)
+
+                    #M Net Pay Computation (YNY)
+                    deductedYNY = monthlysalaryYNY - totalpremiumdeduction
+                    
+                    #M Net Pay for YES - NO - YES
+                    print("   |")
+                    print("   | Monthly Gross Pay:            %.2f" % monthlysalary)
+                    print("   | Monthly Net Pay:              %.2f" % deductedYNY)
+
+            
+                #Monthly Overtime (YNN)
+                elif overtimechoice == 'N' or overtimechoice == 'n':
+
+                    #No need to ask overtime input
+
+                    #M Salary Computation (YNN)
+                    monthlysalaryYNN = monthlysalary - tardycomputation
+
+                    #M Premium Deductions (YNN)
+                    sss = monthlysalaryYNN * 0.045
+                    pagibig = 100 
+                    philhealth = monthlysalaryYNN * 0.04 
+
+                    #M Premium Display (YNN)
+                    print("\n   ======================================")
+                    print("   ||        PREMIUM DEDUCTIONS        ||")
+                    print("   ======================================")
+                    print("   |")
+                    print("   | SSS Contribution:             %.2f" % sss)
+                    print("   | PAG-IBIG Contribution:       ", pagibig)
+                    print("   | PHILHEALTH Contribution:      %.2f" % philhealth)
+
+                    #M Premium Computation (YNN)
+                    totalpremiumdeduction = sss + pagibig + philhealth
+                    print("   | Premium Deduction Total:      %.2f" % totalpremiumdeduction)
+
+                    #M Net Pay Computation (YNN)
+                    deductedYNN = monthlysalaryYNN - totalpremiumdeduction
+                    
+                    #M Net Pay for YES - NO - NO
+                    print("   | Monthly Gross Pay:            %.2f" % monthlysalary)
+                    print("   | Monthly Net Pay:              %.2f" % deductedYNN)
+
+
+                #For Wrong Inputs
+                else:
+                    print("\n   >>>>>>>>>>>>>>>        INVALID  INPUT        <<<<<<<<<<<<<<<")
+
+            #For Wrong Inputs
+            else:
+                print("\n   >>>>>>>>>>>>>>>        INVALID  INPUT        <<<<<<<<<<<<<<<")
+
+
+
+        #Monthly Tardiness (N)
+        elif tardychoice == 'N' or tardychoice == 'n':
+
+            #No need to ask tardy input
+
+            #M Incomplete Question
+            print("   |")
+            incompletechoice = input("   | Did the employee have any incomplete hours? [Y/N]: ")
+
+            #M Incompleteness (NY)
+            if incompletechoice == 'Y' or incompletechoice == 'y':
+
+                #M Incomplete Input (NY)
+                incompletehour = int(input('   | Incomplete Hours:             '))
+
+                #M Incomplete Computation (NY)
+                incompletecomputation = basic_paybyhour * incompletehour
+                
+                #M Incomplete Display (NY)
+                print("   | Monthly Incomplete Hours Deduction: %.2f" % incompletecomputation)
+
+                #M Overtime Question
+                print("   |")
+                overtimechoice = input("   | Did the employee have any overtime? [Y/N]:         ")
+
+                #Monthly Overtime (NYY)
+                if overtimechoice == 'Y' or overtimechoice == 'y':
+
+                    #M Overtime Input (NYY)
+                    overtimebyhour = int(input('   | Overtime Hours:               '))
+
+                    #M Overtime Computation (NYY)
+                    overtimecomputation = basic_paybyhour * 1.5 * overtimebyhour
+
+                    #M Overtime Display (NYY)
+                    print("   | Monthly Overtime Pay:         %.2f" % overtimecomputation)
+
+                    #M Salary Computation (NYY)
+                    monthlysalaryNYY = (monthlysalary - incompletecomputation) + overtimecomputation
+
+                    #M Premium Deductions
+                    sss = monthlysalaryNYY * 0.045
+                    pagibig = 100 
+                    philhealth = monthlysalaryNYY * 0.04
+
+                    #M Premium Display
+                    print("\n   ======================================")
+                    print("   ||        PREMIUM DEDUCTIONS        ||")
+                    print("   ======================================")
+                    print("   |")
+                    print("   | SSS Contribution:             %.2f" % sss)
+                    print("   | PAG-IBIG Contribution:       ", pagibig)
+                    print("   | PHILHEALTH Contribution:      %.2f" % philhealth)
+
+                    #M Premium Computation (NYY)
+                    totalpremiumdeduction = sss + pagibig + philhealth
+                    print("   | Premium Deduction Total:      %.2f" % totalpremiumdeduction)
+
+                    #M Net Pay Computation (NYY)
+                    deductedNYY = monthlysalaryNYY - totalpremiumdeduction   
+
+                    #M Net Pay for NO - YES - YES
+                    print("   |")
+                    print("   | Monthly Gross Pay:            %.2f" % monthlysalary)
+                    print("   | Monthly Net Pay:              %.2f" % deductedNYY)
+
+
+                #Monthly Overtime (NYN)
+                elif overtimechoice == 'N' or overtimechoice == 'n':
+
+                    #No need to ask overtime input
+
+                    #M Salary Computation (NYN)
+                    monthlysalaryNYN = monthlysalary - incompletecomputation
+
+                    #M Premium Deductions (NYN)
+                    sss = monthlysalaryNYN * 0.045
+                    pagibig = 100 
+                    philhealth = monthlysalaryNYN * 0.04
+
+                    #M Premium Display (NYN)
+                    print("\n   ======================================")
+                    print("   ||        PREMIUM DEDUCTIONS        ||")
+                    print("   ======================================")
+                    print("   |")
+                    print("   | SSS Contribution:             %.2f" % sss)
+                    print("   | PAG-IBIG Contribution:       ", pagibig)
+                    print("   | PHILHEALTH Contribution:      %.2f" % philhealth)
+
+                    #M Premium Computations (NYN)
+                    totalpremiumdeduction = sss + pagibig + philhealth
+                    print("   | Premium Deduction Total:      %.2f" % totalpremiumdeduction)
+
+                    #M Net Pay Computation (NYN)
+                    deductedNYN = monthlysalaryNYN - totalpremiumdeduction 
+                    
+                    #M Net Pay for NO - YES - NO
+                    print("   |")
+                    print("   | Monthly Gross Pay:            %.2f" % monthlysalary)
+                    print("   | Monthly Net Pay:              %.2f" % deductedNYN)
+
+                #For Wrong Inputs
+                else:
+                    print("\n   >>>>>>>>>>>>>>>        INVALID  INPUT        <<<<<<<<<<<<<<<")
+                     
+            
+            #Monthly Incompleteness (NN)
+            elif incompletechoice == 'N' or incompletechoice == 'n':
+
+                #No need to ask incomplete hours input
+
+                #M Overtime Question
+                print("   |")
+                overtimechoice = input("   | Did the employee have any overtime? [Y/N]:         ")
+
+                #Monthly Overtime (NNY)
+                if overtimechoice == 'Y' or overtimechoice == 'y':
+
+                    #M Overtime Input (NNY)
+                    overtimebyhour = int(input('   | Overtime Hours:               '))
+
+                    #M Overtime Computation (NNY)
+                    overtimecomputation = basic_paybyhour * 1.5 * overtimebyhour
+
+                    #M Overtime Display (NNY) 
+                    print("   | Monthly Overtime Pay:         %.2f" % overtimecomputation)
+
+                    #M Salary Computation (NNY)
+                    monthlysalaryNNY = monthlysalary + overtimecomputation
+
+                    #M Premium Deductions
+                    sss = monthlysalaryNNY * 0.045
+                    pagibig = 100 
+                    philhealth = monthlysalaryNNY * 0.04
+
+                    #M Premium Display
+                    print("\n   ======================================")
+                    print("   ||        PREMIUM DEDUCTIONS        ||")
+                    print("   ======================================")
+                    print("   |")
+                    print("   | SSS Contribution:             %.2f" % sss)
+                    print("   | PAG-IBIG Contribution:       ", pagibig)
+                    print("   | PHILHEALTH Contribution:      %.2f" % philhealth)
+
+                    #M Premium Computation (NNY)
+                    totalpremiumdeduction = sss + pagibig + philhealth
+                    print("   | Premium Deduction Total:      %.2f" % totalpremiumdeduction)
+                    
+                    #M Net Pay Computation (NNY)
+                    deductedNNY = monthlysalaryNNY - totalpremiumdeduction
+                     
+                    #M Net Pay for NO - NO - YES
+                    print("   |")
+                    print("   | Monthly Gross Pay:            %.2f" % monthlysalary)
+                    print("   | Monthly Net Pay:              %.2f" % deductedNNY)
+
+            
+                #Monthly Overtime (NNN)
+                elif overtimechoice == 'N' or overtimechoice == 'n':
+
+                    #No need to ask overtime input
+
+                    #M Salary Computation (NNN)
+                    monthlysalaryNNN = monthlysalary
+
+                    #M Premium Deductions
+                    sss = monthlysalaryNNN * 0.045
+                    pagibig = 100 
+                    philhealth = monthlysalaryNNN * 0.04
+
+                    #M Premium Displays
+                    print("\n   ======================================")
+                    print("   ||        PREMIUM DEDUCTIONS        ||")
+                    print("   ======================================")
+                    print("   |")
+                    print("   | SSS Contribution:             %.2f" % sss)
+                    print("   | PAG-IBIG Contribution:       ", pagibig)
+                    print("   | PHILHEALTH Contribution:      %.2f" % philhealth)
+
+                    #M Premium Computation (NNN)
+                    totalpremiumdeduction = sss + pagibig + philhealth
+                    print("   | Premium Deduction Total:      %.2f" % totalpremiumdeduction)
+
+                    #M Net Pay Computation (NNN)
+                    deductedNNN = monthlysalaryNNN - totalpremiumdeduction
+                    
+                    #M Net Pay for NO - NO - NO
+                    print("   |")
+                    print("   | Monthly Gross Pay:            %.2f" % monthlysalary)
+                    print("   | Monthly Net Pay:              %.2f" % deductedNNN)
+
+                #For Wrong Inputs
+                else:
+                    print("\n   >>>>>>>>>>>>>>>        INVALID  INPUT        <<<<<<<<<<<<<<<")
+
+            #For Wrong Inputs
+            else:
+                print("\n   >>>>>>>>>>>>>>>        INVALID  INPUT        <<<<<<<<<<<<<<<")
+
+        #For Wrong Inputs
+        else:
+            print("\n   >>>>>>>>>>>>>>>        INVALID  INPUT        <<<<<<<<<<<<<<<")
+
+ #--------------------------------------------------------------------------
+
+except:
+    print("\n   >>>>>>>>>>>>>>        PLEASE TRY AGAIN       <<<<<<<<<<<<<<<")
+
+#Main Code
+starting()
